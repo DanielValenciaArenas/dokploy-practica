@@ -4,18 +4,23 @@ const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.json({
-    mensaje: '¡Actualización automática con Dokploy!',
-    version: '2.0.0',
+    mensaje: '¡Aplicación desplegada con Dokploy!',
     institucion: 'Universidad del Quindío',
-    deploy: 'Git Push to Deploy',
+    programa: 'Ingeniería de Sistemas y Computación',
+    curso: 'Administración de Infraestructura de TI',
+    plataforma: 'Dokploy Paas',
     fecha: new Date().toISOString()
   });
 });
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ estado: 'saludable', version: '2.0.0' });
+  res.status(200).json({ estado: 'saludable', uptime: process.uptime() });
+});
+
+app.get('/info', (req, res) => {
+  res.json({ node_version: process.version, platform: process.platform, arch: process.arch });
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`v2.0.0 corriendo en puerto ${port} Dokploy PaaS`);
+  console.log(`Servidor corriendo en puerto ${port}`);
 });
